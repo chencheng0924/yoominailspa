@@ -1,7 +1,7 @@
 <template>
   <div>
     <section id="HOME" class="hero">
-      <img src="@/assets/img/new/WechatIMG75.jpeg" alt="Pink chrome manicure">
+      <img src="@/assets/img/newJpg/WechatIMG75.jpg" alt="Pink chrome manicure">
       <div class="hero__copy">
         <h1>Yoomi Nail Spa</h1>
         <p>Hands, feet, and a quieter hour.</p>
@@ -17,12 +17,12 @@
     </section>
 
     <section class="band" aria-label="Studio photos">
-      <img src="@/assets/img/new/WechatIMG69.jpeg" alt="Pink and lime nail art">
-      <img src="@/assets/img/new/WechatIMG70.jpeg" alt="Neutral glazed manicure">
-      <img src="@/assets/img/new/WechatIMG71.jpeg" alt="Black floral nail art">
-      <img src="@/assets/img/new/WechatIMG72.jpeg" alt="Graphic manicure">
-      <img src="@/assets/img/new/WechatIMG73.jpeg" alt="Red and black nail art">
-      <img src="@/assets/img/new/WechatIMG74.jpeg" alt="Nail art over a speckled cup">
+      <img src="@/assets/img/newJpg/WechatIMG69.jpg" alt="Pink and lime nail art">
+      <img src="@/assets/img/newJpg/WechatIMG70.jpg" alt="Neutral glazed manicure">
+      <img src="@/assets/img/newJpg/WechatIMG71.jpg" alt="Black floral nail art">
+      <img src="@/assets/img/newJpg/WechatIMG72.jpg" alt="Graphic manicure">
+      <img src="@/assets/img/newJpg/WechatIMG73.jpg" alt="Red and black nail art">
+      <img src="@/assets/img/newJpg/WechatIMG74.jpg" alt="Nail art over a speckled cup">
     </section>
 
     <section id="CARE" class="care">
@@ -30,7 +30,7 @@
         <h2>Care, at your pace</h2>
         <p>Stations stay clean, and the appointment is yours from start to finish. Service names, timing, and prices will replace this note when the menu is final.</p>
       </div>
-      <img src="@/assets/img/new/WechatIMG47.jpeg" alt="Yoomi Nail and Spa storefront">
+      <img src="@/assets/img/newJpg/WechatIMG47.jpg" alt="Yoomi Nail and Spa storefront">
     </section>
   </div>
 </template>
