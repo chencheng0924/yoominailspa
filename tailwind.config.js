@@ -13,6 +13,14 @@ module.exports = {
         "bg-yellow": "#FFFB9B",
         "bg-blue": "#1B18A3",
         "bg-tab": "#DBDBDB",
+        ink: "#333333",
+        coral: "#FE8072",
+        blush: "#E394A4",
+        tide: "#0FA2AD",
+      },
+      fontFamily: {
+        display: ['"Playfair Display"', "serif"],
+        "display-local": ["KaiseiDecol", "serif"],
       },
       padding: {
         c: "16px 24px",

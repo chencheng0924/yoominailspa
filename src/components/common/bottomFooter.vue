@@ -1,87 +1,123 @@
-<script setup>
-import { ref, onMounted, watch, computed, reactive } from 'vue'
-import { useRouter } from 'vue-router'
-const router = useRouter()
-const routerData = reactive([
-  { linkName: '关于ＷＡＧ', link: '/about' },
-  { linkName: '服务项目', link: '/service' },
-  { linkName: '成功案例', link: '/example' },
-  { linkName: '营销博客', link: '/blog' },
-  { linkName: '招聘资讯', link: '/info' },
-  { linkName: '联系我们', link: '/contact' }
-])
-const info = reactive([
-  '美国电话 ❘ +1 929-545-4470', '邮箱 ❘ contact@wag.marketing', '微信 ❘ wagmarketing', '小红书 | WAG品牌营销'
-])
-const emailContent = ref('')
-
-</script>
 <template>
-  <div
-    class="bg-[#000] w-full pt-[30px] pb-[30px] flex flex-col items-center gap-[20px] laptop:gap-[61px] tablet:gap-[61px] tablet:pt-[57px]">
-    <div
-      class="flex gap-[128px] items-center justify-center laptop:flex-col tablet:flex-col laptop:gap-[40px] tablet:gap-[20px] tablet:items-center">
-      <div class="flex flex-col gap-[11px] tablet:items-center tablet:mb-[2rem] items-center">
-        <img src="@/assets/img/logo.png" alt="logo" class="w-[104px] tablet:w-[126px] tablet:mb-[1rem]">
-        <div class="text-center text-[18px] font-[300] text-white teko tracking-widest">133-55 Roosevelt Ave 2nd
-          fl,<br />Flushing, NY
-          11354</div>
-      </div>
-      <div class="flex flex-col gap-[24px] text-white text-center mt-[30px]">
-        <span class="font-[500] text-[24px] tablet:text-[20px] teko tracking-widest">HOURS</span>
-        <div class="font-[300] text-[18px] tablet:text-[15px] teko tracking-widest">Monday-Saturday<br />12PM - 7PM
-        </div>
-        <div class="font-[300] text-[18px] tablet:text-[15px] teko tracking-widest">Sunday<br />12PM - 6PM</div>
-      </div>
-      <div class="flex flex-col items-center gap-[24px] text-white text-center tablet:gap-[1rem] mt-[30px]">
-        <span class="font-[500] text-[24px] tablet:text-[20px] teko tracking-widest">CONTACT</span>
-        <div class="font-[300] text-[18px] tablet:text-[15px] teko tracking-widest">646-379-9995</div>
-        <div class="mt-[24px] flex gap-[4px]">
-          <a href="https://www.facebook.com/tattoo7traintattoo" target="_blank"><img src="@/assets/icon/fb.svg"
-              alt="fblogo" class="cursor-pointer w-[19px]"></a>
-          <a href="https://www.instagram.com/7traintattoo?fbclid=IwY2xjawFewnFleHRuA2FlbQIxMAABHcqHI_FMkjR8IT1735B0pgXEXPciDt_1_Nv7LE-oRxTY9pZbu13gukhsLA_aem_TEbDG7cQC85uP7ejRtsa2Q"
-            target="_blank"><img src="@/assets/icon/ig.svg" alt="iglogo" class="cursor-pointer w-[19px]"></a>
+  <footer id="VISIT" class="visit">
+    <h2>Make an appointment</h2>
+    <div class="visit__grid">
+      <p class="visit__mark">Yoomi Nail &amp; Spa</p>
+      <div>
+        <h3>Business Hours</h3>
+        <p>Monday – Saturday: 12:00PM – 7:00PM</p>
+        <p>Sunday: 12:00PM – 6:00PM</p>
+        <h3>Location</h3>
+        <p>133-55 Roosevelt Ave, 2nd floor, Flushing, NY 11354</p>
+        <h3>Contact</h3>
+        <p>Tel.: <a href="tel:646-379-9995">646-379-9995</a></p>
+        <div class="visit__social">
+          <a href="https://www.facebook.com/tattoo7traintattoo" target="_blank" rel="noreferrer">Facebook</a>
+          <a href="https://www.instagram.com/7traintattoo" target="_blank" rel="noreferrer">Instagram</a>
         </div>
       </div>
     </div>
-    <span
-      class="text-[13px] font-[300] text-[#8A8A8A] laptop:text-center tablet:text-center tablet:text-[12px] tablet:mx-[10%] teko tracking-widest whitespace-nowrap">@2024
-      @2024 7 Train Tattoo Studio. All Rights Reserved. x WAG Marketing</span>
-  </div>
+    <div class="visit__bar">© 2026 Yoomi Nail Spa. All Rights Reserved. x WAG Marketing</div>
+  </footer>
 </template>
+
 <style lang="scss" scoped>
-@import url('https://fonts.googleapis.com/css2?family=Teko:wght@300..700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Teachers:ital,wght@0,400..800;1,400..800&display=swap');
+.visit {
+  background: #333333;
+  color: #ffffff;
+  padding: 72px 40px 0;
 
-.teko {
-  font-family: "Teko", sans-serif;
-}
-
-.noto {
-  font-family: "Noto Sans", sans-serif;
-}
-
-.tea {
-  font-family: "Teachers", sans-serif;
-}
-
-.pic {
-  background-color: rgba(0, 0, 0, 0.7);
-}
-
-.p-example {
-  &__body {
-    background: #d4e735;
-    overflow: hidden;
-    color: #333;
+  h2 {
+    margin: 0 0 48px;
+    color: #0fa2ad;
+    text-align: center;
+    font-family: var(--display-font), "Playfair Display", serif;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1.32;
   }
 
-  &__splide {
-    padding: 3rem 2rem;
+  &__grid {
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    align-items: flex-start;
+    padding-bottom: 72px;
+  }
 
-    @media screen and (min-width: 768px) {
-      padding: 4rem;
+  h3 {
+    margin: 28px 0 8px;
+    font-family: var(--display-font), "Playfair Display", serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 28px;
+  }
+
+  p,
+  a {
+    margin: 0;
+    color: #ffffff;
+    font-family: "InriaSans", "Noto Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22.4px;
+    text-decoration: none;
+  }
+
+  .visit__mark {
+    margin: 0;
+    max-width: 280px;
+    color: #ffffff;
+    font-family: var(--display-font), "Playfair Display", serif;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  &__social {
+    display: flex;
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  &__bar {
+    margin: 0 -40px;
+    height: 85px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #e394a4;
+    color: #000000;
+    font-family: "InriaSans", "Noto Sans", sans-serif;
+    font-size: 14px;
+    text-align: center;
+    padding: 0 16px;
+  }
+}
+
+@media (max-width: 800px) {
+  .visit {
+    padding: 48px 20px 0;
+
+    h2 {
+      font-size: 32px;
+    }
+
+    &__grid {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 32px;
+    }
+
+    &__social {
+      justify-content: center;
+    }
+
+    &__bar {
+      margin: 0 -20px;
+      height: auto;
+      min-height: 85px;
     }
   }
 }

@@ -1,95 +1,136 @@
 <script setup lang="ts">
-import { ref, onMounted, watch, computed, reactive } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 const router = useRouter()
-const optionList = ref(['HOME', 'ABOUT', 'ARTISTS', 'GALLERY', 'CONTACT'])
+const optionList = ref(['HOME', 'ABOUT', 'CARE', 'VISIT'])
+const activeId = ref('HOME')
 const showHamburger = ref(false)
-const menuShow = ref<boolean>(false)
-const scrollTo = (id:string) => {
-  if(menuShow.value){
-    menuShow.value = false
-  }
-  
-  let targetId = id
-  if(id === 'CONTACT') {
-    const screenWidth = window.innerWidth
-    targetId = screenWidth <= 500 ? 'CONTACT-MOBILE' : 'CONTACT-DESKTOP'
-  }
 
-  const element = document.getElementById(targetId)
+const scrollTo = (id: string) => {
+  activeId.value = id
   showHamburger.value = false
-  
-  if(element){
-    const elementPosition = element.getBoundingClientRect().top;
-    const offsetPosition = elementPosition + window.pageYOffset - 95;
+
+  const element = document.getElementById(id)
+  const header = document.querySelector('.site-header')
+  const headerHeight = header ? header.getBoundingClientRect().height : 92
+  if (element) {
+    const offsetPosition = element.getBoundingClientRect().top + window.pageYOffset - headerHeight
     window.scrollTo({
       top: offsetPosition,
       behavior: 'smooth'
-    });
+    })
   }
 }
-const orderUrl = ref<string>('https://order.mealkeyway.com/customer/release/index?mid=45774946684268454942534476706e424837583342773d3d#/main')
 
-const goUrl = (url?: string) => {
-  if(!url){
-    url = orderUrl.value
-  }
-  window.open(url, '_blank');
-}
+onMounted(() => {
+  const choice = new URLSearchParams(window.location.search).get('font')
+  const family = choice === 'kaisei'
+    ? 'KaiseiDecol, serif'
+    : '"Playfair Display", serif'
+  document.documentElement.style.setProperty('--display-font', family)
+})
 </script>
 <template>
-  <div
-    class="flex bg-white pt-[7px] pl-[90px] pr-[90px] pb-[7px] justify-center items-center laptop:justify-center tablet:justify-center laptop:pt-[10px] laptop:pb-[10px] tablet:pt-[10px] tablet:pb-[10px] fixed top-0 left-0 z-50 w-full tablet:px-[5%]">
-    <div class="flex justify-between items-center w-full gap-[5rem] max-w-[1200px]">
-      <div class="w-full flex justify-between items-center gap-[5rem] tablet:justify-center">
-        <div class="flex items-center cursor-pointer" @click="router.push('/')">
-          <img class="w-[59px] h-[59px] object-contain" src="@/assets/img/logo.png" alt="logo">
-          <div class="whitespace-nowrap text-[20px] font-[400] tablet:text-[18px] teko mt-[8px]">7 Train Tattoo Studio Inc</div>
-        </div>
-        <div class="flex gap-[32px] text-black laptop:hidden tablet:hidden text-[17px]">
-          <div v-for="(link, idx) in optionList" :key="idx" @click="scrollTo(link)" class="cursor-pointer teko">{{ link
-            }}</div>
-        </div>
-      </div>
-
-      <div
-        class="whitespace-nowrap tablet:hidden laptop:hidden text-white bg-[#000] font-[500] h-[32px] px-[24px] py-[6px] rounded-full cursor-pointer flex justify-center items-center">
-        <a :href="'tel:646-379-9995'" class="text-[17px] teko">BOOK NOW: 646-379-9995</a>
-      </div>
-    </div>
-    <!-- <img src="@/assets/img/menu.svg" class="absolute top-[16px] right-4 cursor-pointer desktop:hidden mac:hidden tablet:hidden" @click="showHamburger = true"> -->
-    <img src="@/assets/img/menuWhite.svg" class="absolute top-[1.5rem] right-4 cursor-pointer desktop:hidden mac:hidden"
-      @click="showHamburger = true">
-  </div>
-  <Transition name="slide-fade">
-    <div class="w-full h-full fixed top-0 left-0 bg-white z-50 flex items-center pt-[75px] flex-col"
-      v-if="showHamburger">
-      <img src="@/assets/icon/close.svg" class="fixed top-[16px] right-4 cursor-pointer desktop:hidden"
-        @click="showHamburger = false">
-      <div class="flex gap-[24px] text-text-black flex-col items-center">
-        <div v-for="(link, idx) in optionList" :key="idx" @click="scrollTo(link)" class="cursor-pointer teko">{{ link }}
-        </div>
-      </div>
-    </div>
-  </Transition>
+  <header class="site-header">
+    <a class="brand" href="/" @click.prevent="router.push('/')">Yoomi</a>
+    <nav class="site-nav" aria-label="Site">
+      <button
+        v-for="link in optionList"
+        :key="link"
+        type="button"
+        class="nav-link"
+        :class="{ 'is-active': activeId === link }"
+        @click="scrollTo(link)"
+      >
+        {{ link.charAt(0) + link.slice(1).toLowerCase() }}
+      </button>
+    </nav>
+    <a class="book" href="tel:646-379-9995">Book Now</a>
+  </header>
 </template>
 <style lang="scss" scoped>
-@import url('https://fonts.googleapis.com/css2?family=Teko:wght@300..700&display=swap');
-
-.teko {
-  font-family: "Teko", sans-serif;
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  height: 92px;
+  padding: 0 28px;
+  background: #333333;
+  gap: 12px;
 }
-.slide-fade-enter-active {
-  transition: all 0.3s ease-out;
+
+.brand {
+  flex: 0 0 auto;
+  margin-right: 12px;
+  color: #ffffff;
+  font-family: var(--display-font), "Playfair Display", serif;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
 }
 
-.slide-fade-leave-active {
-  transition: all 0.3s ease-out;
+.site-nav {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
-.slide-fade-enter-from,
-.slide-fade-leave-to {
-  transform: translateX(20px);
-  opacity: 0;
+.nav-link {
+  flex: 0 0 auto;
+  border: 0;
+  background: transparent;
+  padding: 0 10px;
+  color: #ffffff;
+  font-family: var(--display-font), "Playfair Display", serif;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 20px;
+  cursor: pointer;
+
+  &.is-active {
+    color: #fe8072;
+  }
+}
+
+.book {
+  flex: 0 0 auto;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 142px;
+  height: 40px;
+  background: #e394a4;
+  color: #ffffff;
+  border-radius: 0;
+  font-family: "InriaSans", "Noto Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 16px;
+  text-decoration: none;
+}
+
+@media (max-width: 949px) {
+  .site-header {
+    height: 72px;
+    padding: 0 12px;
+  }
+
+  .brand {
+    font-size: 26px;
+  }
+
+  .book {
+    width: 108px;
+  }
 }
 </style>
